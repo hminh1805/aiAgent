@@ -1,6 +1,7 @@
 import urllib.parse
+from datetime import datetime
 
-tool_list = ["calculator", "weather", "chat", "search", "image"]
+tool_list = ["calculator", "weather", "chat", "search", "image", "date", "time"]
 
 def weather_tool(input_data):
     # Giả sử đây là hàm gọi API thời tiết
@@ -47,10 +48,23 @@ def search_tool(input_data):
 
 
 def image_tool(input_data):
-    """Sinh ảnh từ prompt bằng Pollinations.ai (free, không cần token)."""
+    """Sinh ảnh từ prompt bằng Pollinations.ai (free, dùng flux-realism cho chất lượng cao)."""
     prompt = urllib.parse.quote(input_data)
-    url = f"https://image.pollinations.ai/prompt/{prompt}"
+    # flux-realism: chất lượng cao, giống thật
+    url = f"https://image.pollinations.ai/prompt/{prompt}?model=flux-realism&nologo=true"
     return url
+
+
+def date_tool(input_data):
+    """Lấy ngày hôm nay."""
+    now = datetime.now()
+    return f"Hôm nay là ngày {now.day}/{now.month}/{now.year}, thứ {now.strftime('%A')}."
+
+
+def time_tool(input_data):
+    """Lấy giờ hiện tại."""
+    now = datetime.now()
+    return f"Giờ hiện tại là {now.hour}:{now.minute:02d} ( múi giờ Việt Nam UTC+7)."
 
 
 
@@ -77,5 +91,9 @@ def call_API(tool_name, input_data):
         return search_tool(input_data)
     elif tool_name == "image":
         return image_tool(input_data)
+    elif tool_name == "date":
+        return date_tool(input_data)
+    elif tool_name == "time":
+        return time_tool(input_data)
 
     return f"Tool {tool_name} chưa được hỗ trợ."

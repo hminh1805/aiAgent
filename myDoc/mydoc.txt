@@ -1,0 +1,43 @@
+Ý tưởng: 
+Xây 1 hệ thống Quản lý các Agent (nên có UI để dễ xem) -> Xài luôn Web UI của OpenClaw
+Agent :
+- học đúng skill liên quan
+- tương tác thông qua backend
+- tương tác với nhau qua AGENTS.md của .openclaw
+
+"ANTHROPIC_BASE_URL": "http://172.16.12.230:8000",
+
+"ANTHROPIC_API_KEY": "ollama",
+
+"ANTHROPIC_AUTH_TOKEN": "ollama",
+
+"ANTHROPIC_DEFAULT_OPUS_MODEL": "Qwen/Qwen3.6-35B-A3B-FP8",
+
+TODO :
+- tìm hiểu cách cấu hình từng con:
+    + SKILL , TOOL , json , SOUL , SELL
+    
+- tìm hiểu cách các Agent giao tiếp : 
+    + AGENTS chỉnh trong openclaw.json -> kiếm phần tool -> thêm agentToAgent và sessions cho là all nó mới thấy sessions khác
+    "tools": {
+    "profile": "coding",
+    "agentToAgent": {
+      "enabled": true,
+      "allow": [
+        "main",
+        "mimi",
+        "LaLa",
+        "lala",
+        "momo"
+      ]
+    },
+    "sessions": {
+      "visibility": "all"
+    },
+    "web": {
+      "search": {
+        "provider": "gemini",
+        "enabled": true
+      }
+    }
+  },
